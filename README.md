@@ -27,33 +27,33 @@ claude install github:Owl-Listener/designer-skills
 ## All Commands
 | Command | Plugin | Description |
 |---------|--------|-------------|
-| `/discover` | design-research | Run a full user research discovery cycle. |
-| `/interview` | design-research | Prepare and conduct a user interview. |
-| `/test-plan` | design-research | Create a usability test plan. |
-| `/synthesize` | design-research | Synthesize research data into insights. |
-| `/audit-system` | design-systems | Audit a design system for consistency and accessibility. |
-| `/create-component` | design-systems | Scaffold a full component specification. |
-| `/tokenize` | design-systems | Extract and organize design tokens. |
-| `/strategize` | ux-strategy | Develop a complete UX strategy. |
-| `/benchmark` | ux-strategy | Run a competitive benchmarking analysis. |
-| `/frame-problem` | ux-strategy | Structure an ambiguous challenge into a clear problem. |
-| `/design-screen` | ui-design | Design a complete screen layout. |
-| `/color-palette` | ui-design | Generate a full color palette with accessibility checks. |
-| `/type-system` | ui-design | Create a complete typography system. |
-| `/responsive-audit` | ui-design | Audit a design for responsive behavior. |
-| `/design-interaction` | interaction-design | Design a complete interaction flow. |
-| `/map-states` | interaction-design | Model states and transitions for a component. |
-| `/error-flow` | interaction-design | Design error handling for a feature. |
-| `/prototype-plan` | prototyping-testing | Create a prototyping and testing plan. |
-| `/evaluate` | prototyping-testing | Run a heuristic evaluation. |
-| `/test-plan` | prototyping-testing | Design a complete usability testing plan. |
-| `/experiment` | prototyping-testing | Design an A/B experiment. |
-| `/plan-sprint` | design-ops | Plan a design sprint. |
-| `/handoff` | design-ops | Generate a developer handoff package. |
-| `/setup-workflow` | design-ops | Set up a design team workflow. |
-| `/write-rationale` | designer-toolkit | Write design rationale for decisions. |
-| `/build-presentation` | designer-toolkit | Structure a design presentation. |
-| `/write-case-study` | designer-toolkit | Create a portfolio case study. |
+| `/design-research:discover` | design-research | Run a full user research discovery cycle. |
+| `/design-research:interview` | design-research | Prepare and conduct a user interview. |
+| `/design-research:test-plan` | design-research | Create a usability test plan. |
+| `/design-research:synthesize` | design-research | Synthesize research data into insights. |
+| `/design-systems:audit-system` | design-systems | Audit a design system for consistency and accessibility. |
+| `/design-systems:create-component` | design-systems | Scaffold a full component specification. |
+| `/design-systems:tokenize` | design-systems | Extract and organize design tokens. |
+| `/ux-strategy:strategize` | ux-strategy | Develop a complete UX strategy. |
+| `/ux-strategy:benchmark` | ux-strategy | Run a competitive benchmarking analysis. |
+| `/ux-strategy:frame-problem` | ux-strategy | Structure an ambiguous challenge into a clear problem. |
+| `/ui-design:design-screen` | ui-design | Design a complete screen layout. |
+| `/ui-design:color-palette` | ui-design | Generate a full color palette with accessibility checks. |
+| `/ui-design:type-system` | ui-design | Create a complete typography system. |
+| `/ui-design:responsive-audit` | ui-design | Audit a design for responsive behavior. |
+| `/interaction-design:design-interaction` | interaction-design | Design a complete interaction flow. |
+| `/interaction-design:map-states` | interaction-design | Model states and transitions for a component. |
+| `/interaction-design:error-flow` | interaction-design | Design error handling for a feature. |
+| `/prototyping-testing:prototype-plan` | prototyping-testing | Create a prototyping and testing plan. |
+| `/prototyping-testing:evaluate` | prototyping-testing | Run a heuristic evaluation. |
+| `/prototyping-testing:test-plan` | prototyping-testing | Design a complete usability testing plan. |
+| `/prototyping-testing:experiment` | prototyping-testing | Design an A/B experiment. |
+| `/design-ops:plan-sprint` | design-ops | Plan a design sprint. |
+| `/design-ops:handoff` | design-ops | Generate a developer handoff package. |
+| `/design-ops:setup-workflow` | design-ops | Set up a design team workflow. |
+| `/designer-toolkit:write-rationale` | designer-toolkit | Write design rationale for decisions. |
+| `/designer-toolkit:build-presentation` | designer-toolkit | Structure a design presentation. |
+| `/designer-toolkit:write-case-study` | designer-toolkit | Create a portfolio case study. |
 ## Contributing
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on adding new skills, commands, and plugins.
 ## License
