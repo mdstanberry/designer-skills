@@ -14,25 +14,52 @@ Agentic skills, commands, and plugins for design — from research to systems, U
 | [designer-toolkit](./designer-toolkit) | 6 | 3 | Essential utilities: design rationale, presentations, case studies, UX writing, and system adoption. |
 ## Quick Start
 
-### Step 1: Add the Marketplace
+### Step 1: Clone the Repository
 
-In Claude Code, run:
-
-```
-/plugin marketplace add Owl-Listener/designer-skills
+```bash
+git clone https://github.com/mdstanberry/designer-skills.git
 ```
 
-This registers the marketplace so you can browse and install individual plugins.
+### Step 2: Install into Your Project
 
-### Step 2: Install Plugins
+Run the install script, passing the path to your Claude Code project:
 
-Open the plugin manager and browse available plugins:
+```bash
+cd designer-skills
+./install.sh ~/my-project
+```
+
+This copies all 63 skills and 27 commands into your project's `.claude/` directory.
+
+#### Install Specific Plugins
+
+To install only the plugins you need:
+
+```bash
+./install.sh -p ui-design -p ux-strategy ~/my-project
+```
+
+#### List Available Plugins
+
+```bash
+./install.sh -l
+```
+
+#### Uninstall
+
+```bash
+./install.sh -u ~/my-project
+```
+
+### Step 3: Use Commands in Claude Code
+
+After installation, commands are available as project slash commands:
 
 ```
-/plugin
+/project:ui-design/design-screen user profile settings page
+/project:design-research/discover onboarding flow
+/project:ux-strategy/strategize mobile checkout experience
 ```
-
-Go to the **Discover** tab to see all 8 design plugins, then select and install the ones you want.
 
 ## What Are Skills and Commands?
 - **Skills** are domain knowledge units (nouns). They teach Claude about a design topic — like creating user personas, defining design tokens, or writing error messages.
@@ -40,33 +67,33 @@ Go to the **Discover** tab to see all 8 design plugins, then select and install 
 ## All Commands
 | Command | Plugin | Description |
 |---------|--------|-------------|
-| `/design-research:discover` | design-research | Run a full user research discovery cycle. |
-| `/design-research:interview` | design-research | Prepare and conduct a user interview. |
-| `/design-research:test-plan` | design-research | Create a usability test plan. |
-| `/design-research:synthesize` | design-research | Synthesize research data into insights. |
-| `/design-systems:audit-system` | design-systems | Audit a design system for consistency and accessibility. |
-| `/design-systems:create-component` | design-systems | Scaffold a full component specification. |
-| `/design-systems:tokenize` | design-systems | Extract and organize design tokens. |
-| `/ux-strategy:strategize` | ux-strategy | Develop a complete UX strategy. |
-| `/ux-strategy:benchmark` | ux-strategy | Run a competitive benchmarking analysis. |
-| `/ux-strategy:frame-problem` | ux-strategy | Structure an ambiguous challenge into a clear problem. |
-| `/ui-design:design-screen` | ui-design | Design a complete screen layout. |
-| `/ui-design:color-palette` | ui-design | Generate a full color palette with accessibility checks. |
-| `/ui-design:type-system` | ui-design | Create a complete typography system. |
-| `/ui-design:responsive-audit` | ui-design | Audit a design for responsive behavior. |
-| `/interaction-design:design-interaction` | interaction-design | Design a complete interaction flow. |
-| `/interaction-design:map-states` | interaction-design | Model states and transitions for a component. |
-| `/interaction-design:error-flow` | interaction-design | Design error handling for a feature. |
-| `/prototyping-testing:prototype-plan` | prototyping-testing | Create a prototyping and testing plan. |
-| `/prototyping-testing:evaluate` | prototyping-testing | Run a heuristic evaluation. |
-| `/prototyping-testing:test-plan` | prototyping-testing | Design a complete usability testing plan. |
-| `/prototyping-testing:experiment` | prototyping-testing | Design an A/B experiment. |
-| `/design-ops:plan-sprint` | design-ops | Plan a design sprint. |
-| `/design-ops:handoff` | design-ops | Generate a developer handoff package. |
-| `/design-ops:setup-workflow` | design-ops | Set up a design team workflow. |
-| `/designer-toolkit:write-rationale` | designer-toolkit | Write design rationale for decisions. |
-| `/designer-toolkit:build-presentation` | designer-toolkit | Structure a design presentation. |
-| `/designer-toolkit:write-case-study` | designer-toolkit | Create a portfolio case study. |
+| `/project:design-research/discover` | design-research | Run a full user research discovery cycle. |
+| `/project:design-research/interview` | design-research | Prepare and conduct a user interview. |
+| `/project:design-research/test-plan` | design-research | Create a usability test plan. |
+| `/project:design-research/synthesize` | design-research | Synthesize research data into insights. |
+| `/project:design-systems/audit-system` | design-systems | Audit a design system for consistency and accessibility. |
+| `/project:design-systems/create-component` | design-systems | Scaffold a full component specification. |
+| `/project:design-systems/tokenize` | design-systems | Extract and organize design tokens. |
+| `/project:ux-strategy/strategize` | ux-strategy | Develop a complete UX strategy. |
+| `/project:ux-strategy/benchmark` | ux-strategy | Run a competitive benchmarking analysis. |
+| `/project:ux-strategy/frame-problem` | ux-strategy | Structure an ambiguous challenge into a clear problem. |
+| `/project:ui-design/design-screen` | ui-design | Design a complete screen layout. |
+| `/project:ui-design/color-palette` | ui-design | Generate a full color palette with accessibility checks. |
+| `/project:ui-design/type-system` | ui-design | Create a complete typography system. |
+| `/project:ui-design/responsive-audit` | ui-design | Audit a design for responsive behavior. |
+| `/project:interaction-design/design-interaction` | interaction-design | Design a complete interaction flow. |
+| `/project:interaction-design/map-states` | interaction-design | Model states and transitions for a component. |
+| `/project:interaction-design/error-flow` | interaction-design | Design error handling for a feature. |
+| `/project:prototyping-testing/prototype-plan` | prototyping-testing | Create a prototyping and testing plan. |
+| `/project:prototyping-testing/evaluate` | prototyping-testing | Run a heuristic evaluation. |
+| `/project:prototyping-testing/test-plan` | prototyping-testing | Design a complete usability testing plan. |
+| `/project:prototyping-testing/experiment` | prototyping-testing | Design an A/B experiment. |
+| `/project:design-ops/plan-sprint` | design-ops | Plan a design sprint. |
+| `/project:design-ops/handoff` | design-ops | Generate a developer handoff package. |
+| `/project:design-ops/setup-workflow` | design-ops | Set up a design team workflow. |
+| `/project:designer-toolkit/write-rationale` | designer-toolkit | Write design rationale for decisions. |
+| `/project:designer-toolkit/build-presentation` | designer-toolkit | Structure a design presentation. |
+| `/project:designer-toolkit/write-case-study` | designer-toolkit | Create a portfolio case study. |
 ## Contributing
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on adding new skills, commands, and plugins.
 ## License
