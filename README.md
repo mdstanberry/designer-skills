@@ -19,7 +19,7 @@ Agentic skills, commands, and plugins for design — from research to systems, U
 In Claude Code, run:
 
 ```
-/plugin marketplace add mdstanberry/designer-skills
+/plugin marketplace add Owl-Listener/designer-skills
 ```
 
 This registers the marketplace so you can browse and install individual plugins.
