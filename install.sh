@@ -25,6 +25,7 @@ TARGET=""
 PLUGINS=()
 LIST_MODE=false
 UNINSTALL=false
+GLOBAL=false
 
 # ── Usage ─────────────────────────────────────────────────────
 usage() {
@@ -35,24 +36,26 @@ Usage:
   ./install.sh [options] [target-directory]
 
 Options:
-  -p, --plugin <name>   Install specific plugin(s). Repeat for multiple.
+  -g, --global           Install to ~/.claude/ (available in all sessions).
+                         Without this flag, installs to a project directory.
+  -p, --plugin <name>    Install specific plugin(s). Repeat for multiple.
                          If omitted, all 8 plugins are installed.
   -l, --list             List available plugins and exit.
-  -u, --uninstall        Remove designer-skills from the target project.
+  -u, --uninstall        Remove designer-skills from the target.
   -h, --help             Show this help message.
 
 Examples:
-  ./install.sh                          # Install all plugins into current dir
-  ./install.sh ~/my-project             # Install all plugins into ~/my-project
-  ./install.sh -p ui-design             # Install only ui-design plugin
+  ./install.sh -g                       # Install all plugins globally
+  ./install.sh -g -p ui-design          # Install one plugin globally
+  ./install.sh ~/my-project             # Install into a specific project
   ./install.sh -p ui-design -p ux-strategy ~/my-project
-  ./install.sh -u ~/my-project          # Uninstall from ~/my-project
+  ./install.sh -u -g                    # Uninstall globally
+  ./install.sh -u ~/my-project          # Uninstall from a project
   ./install.sh -l                       # List available plugins
 
 After install, commands are available as slash commands in Claude Code:
-  /project:design-research/discover
-  /project:ui-design/design-screen
-  etc.
+  Global:  /user:design-research/discover
+  Project: /project:design-research/discover
 USAGE
 }
 
@@ -62,6 +65,10 @@ while [[ $# -gt 0 ]]; do
     -p|--plugin)
       PLUGINS+=("$2")
       shift 2
+      ;;
+    -g|--global)
+      GLOBAL=true
+      shift
       ;;
     -l|--list)
       LIST_MODE=true
@@ -105,8 +112,14 @@ if $LIST_MODE; then
 fi
 
 # ── Resolve target ────────────────────────────────────────────
-TARGET="${TARGET:-.}"
-TARGET="$(cd "$TARGET" && pwd)"
+if $GLOBAL; then
+  TARGET="$HOME"
+  SCOPE="user"
+else
+  TARGET="${TARGET:-.}"
+  TARGET="$(cd "$TARGET" && pwd)"
+  SCOPE="project"
+fi
 
 if [[ ! -d "$TARGET" ]]; then
   echo "Error: Target directory does not exist: $TARGET" >&2
@@ -115,7 +128,11 @@ fi
 
 # ── Uninstall ─────────────────────────────────────────────────
 if $UNINSTALL; then
-  echo "Uninstalling designer-skills from $TARGET ..."
+  if $GLOBAL; then
+    echo "Uninstalling designer-skills from ~/.claude/ ..."
+  else
+    echo "Uninstalling designer-skills from $TARGET ..."
+  fi
   removed=0
 
   for plugin in "${ALL_PLUGINS[@]}"; do
@@ -169,7 +186,11 @@ SKILLS_DIR="$TARGET/.claude/designer-skills"
 total_skills=0
 total_commands=0
 
-echo "Installing designer-skills into $TARGET ..."
+if $GLOBAL; then
+  echo "Installing designer-skills globally (~/.claude/) ..."
+else
+  echo "Installing designer-skills into $TARGET ..."
+fi
 echo ""
 
 for plugin in "${PLUGINS[@]}"; do
@@ -201,11 +222,16 @@ for plugin in "${PLUGINS[@]}"; do
       cp "$cmd_file" "$target_file"
 
       # Append skill resolution instructions
+      if $GLOBAL; then
+        skills_path="~/.claude/designer-skills/$plugin"
+      else
+        skills_path=".claude/designer-skills/$plugin"
+      fi
       cat >> "$target_file" <<FOOTER
 
 ---
 ## Skill Resolution
-When this command references a skill by name (e.g. \`skill-name\` skill), read the full skill definition from \`.claude/designer-skills/$plugin/skill-name.md\` before applying it. Each skill file contains domain context, detailed instructions, and methodology that you must follow.
+When this command references a skill by name (e.g. \`skill-name\` skill), read the full skill definition from \`$skills_path/skill-name.md\` before applying it. Each skill file contains domain context, detailed instructions, and methodology that you must follow.
 FOOTER
 
       plugin_commands=$((plugin_commands + 1))
@@ -228,7 +254,7 @@ for plugin in "${PLUGINS[@]}"; do
     for cmd_file in "$COMMANDS_DIR/$plugin"/*.md; do
       [[ -f "$cmd_file" ]] || continue
       cmd_name=$(basename "$cmd_file" .md)
-      echo "  /project:$plugin/$cmd_name"
+      echo "  /$SCOPE:$plugin/$cmd_name"
     done
   fi
 done

@@ -20,23 +20,31 @@ Agentic skills, commands, and plugins for design — from research to systems, U
 git clone https://github.com/mdstanberry/designer-skills.git
 ```
 
-### Step 2: Install into Your Project
+### Step 2: Install
 
-Run the install script, passing the path to your Claude Code project:
+#### Global install (available in all Claude Code sessions)
+
+```bash
+cd designer-skills
+./install.sh -g
+```
+
+This copies all 63 skills and 27 commands into `~/.claude/`, making them available everywhere.
+
+#### Project install (available only in one project)
 
 ```bash
 cd designer-skills
 ./install.sh ~/my-project
 ```
 
-This copies all 63 skills and 27 commands into your project's `.claude/` directory.
+This copies into the project's `.claude/` directory. Commit it to share with your team.
 
 #### Install Specific Plugins
 
-To install only the plugins you need:
-
 ```bash
-./install.sh -p ui-design -p ux-strategy ~/my-project
+./install.sh -g -p ui-design -p ux-strategy
+./install.sh -p ui-design ~/my-project
 ```
 
 #### List Available Plugins
@@ -48,18 +56,21 @@ To install only the plugins you need:
 #### Uninstall
 
 ```bash
-./install.sh -u ~/my-project
+./install.sh -u -g              # uninstall globally
+./install.sh -u ~/my-project    # uninstall from a project
 ```
 
 ### Step 3: Use Commands in Claude Code
 
-After installation, commands are available as project slash commands:
+After installation, commands are available as slash commands:
 
 ```
-/project:ui-design/design-screen user profile settings page
-/project:design-research/discover onboarding flow
-/project:ux-strategy/strategize mobile checkout experience
+/user:ui-design/design-screen user profile settings page
+/user:design-research/discover onboarding flow
+/user:ux-strategy/strategize mobile checkout experience
 ```
+
+For project installs, use `/project:` instead of `/user:`.
 
 ## What Are Skills and Commands?
 - **Skills** are domain knowledge units (nouns). They teach Claude about a design topic — like creating user personas, defining design tokens, or writing error messages.
